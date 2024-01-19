@@ -43,8 +43,8 @@ function TodoApp({ initialTodos }) {
   }
 
   const initialFormData = {
-    title: 'test',
-    description: 'TEST INITIAL',
+    title: '',
+    description: '',
     priority: 1,
   }
 
