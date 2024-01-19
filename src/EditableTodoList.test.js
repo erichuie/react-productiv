@@ -1,18 +1,18 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import EditableTodoList from "./EditableTodoList"
+import EditableTodoList from "./EditableTodoList";
 
 const TEST_TODO_1 = {
-  id:1,
-  title:"Make Todo list",
-  description:"creating todo list",
+  id: 1,
+  title: "Make Todo list",
+  description: "creating todo list",
   priority: 1
 };
 
 const TEST_TODO_2 = {
-  id:2,
-  title:"Do the dishes",
-  description:"clean plates",
+  id: 2,
+  title: "Do the dishes",
+  description: "clean plates",
   priority: 2
 };
 
@@ -29,9 +29,9 @@ beforeEach(function () {
     />
   );
   container = renderedComp.container;
-})
+});
 
-describe("EditableTodoList Component tests",function(){
+describe("EditableTodoList Component tests", function () {
   it("renders without crashing", function () {
     render(<EditableTodoList
       todos={todosList}

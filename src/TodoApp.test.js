@@ -24,22 +24,22 @@ const TEST_TODOS = [
 ];
 
 
-describe("TodoApp component", function(){
+describe("TodoApp component", function () {
   it("renders without crashing", function () {
     render(<TodoApp initialTodos={TEST_TODOS} />);
   });
 
-  it("shows no todo components if zero todos", function(){
+  it("shows no todo components if zero todos", function () {
     const renderedTodo = render(<TodoApp initialTodos={{}} />);
     expect(renderedTodo.getByText("You have no todos.")).toBeInTheDocument();
     expect(renderedTodo.queryAllByText("Top Todo").length).toEqual(0);
-    expect(renderedTodo.container.querySelector(".NewTodoForm")).toBeInTheDocument();
+    expect(renderedTodo.container.querySelector(".TodoForm")).toBeInTheDocument();
   });
 
-  it("shows overall TodoApp", function(){
+  it("shows overall TodoApp", function () {
     const renderedTodo = render(<TodoApp initialTodos={TEST_TODOS} />);
     expect(renderedTodo.container.querySelector(".EditableTodoList")).toBeInTheDocument();
     expect(renderedTodo.queryAllByText("Top Todo").length).toEqual(1);;
-    expect(renderedTodo.container.querySelector(".NewTodoForm")).toBeInTheDocument();
+    expect(renderedTodo.container.querySelector(".TodoForm")).toBeInTheDocument();
   });
 });

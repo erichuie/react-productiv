@@ -39,6 +39,7 @@ it("submitting form works", function () {
 
   // submit and check callback is called
   fireEvent.click(container.querySelector(".TodoForm-addBtn"));
+
   expect(handleSave).toHaveBeenCalledTimes(1);
 
   // check initial form values reset
@@ -46,7 +47,7 @@ it("submitting form works", function () {
   expect(container.querySelector("#TodoForm-description").innerHTML).toEqual("");
 
   // check that currently selected value is default initial
-  const select = container.querySelector("#TodoForm-priority")
+  const select = container.querySelector("#TodoForm-priority");
   expect(select.options[select.selectedIndex].value).toEqual("1");
 
 });

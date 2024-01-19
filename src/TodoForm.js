@@ -17,6 +17,7 @@ function TodoForm({ initialFormData, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
 
+  //find way to keep priority as a Number and not a string
 
   /** Update form input. */
   function handleChange(evt) {
@@ -32,10 +33,11 @@ function TodoForm({ initialFormData, handleSave }) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    //don't mutate state; make a whole new object instead
     if (!("id" in formData)) {
       formData.id = uuid();
     }
-    console.log("submitting form:", formData)
+    console.log("submitting form:", formData);
 
 
     handleSave(formData);
@@ -43,54 +45,54 @@ function TodoForm({ initialFormData, handleSave }) {
   }
 
   return (
-      <form className="TodoForm" onSubmit={handleSubmit}>
+    <form className="TodoForm" onSubmit={handleSubmit}>
 
-        <div className="mb-3">
-          <input
-              id="TodoForm-title"
-              name="title"
-              className="form-control"
-              placeholder="Title"
-              onChange={handleChange}
-              value={formData.title}
-              aria-label="Title"
-          />
+      <div className="mb-3">
+        <input
+          id="TodoForm-title"
+          name="title"
+          className="form-control"
+          placeholder="Title"
+          onChange={handleChange}
+          value={formData.title}
+          aria-label="Title"
+        />
+      </div>
+
+      <div className="mb-3">
+        <textarea
+          id="TodoForm-description"
+          name="description"
+          className="form-control"
+          placeholder="Description"
+          onChange={handleChange}
+          value={formData.description}
+          aria-label="Description"
+        />
+      </div>
+
+      <div className="mb-3 d-flex justify-content-between">
+        <div className="w-75 d-flex justify-content-between">
+          <label htmlFor="TodoForm-priority"
+            className="d-inline-flex">Priority:&nbsp;&nbsp;
+          </label>
+          <select id="TodoForm-priority"
+            name="priority"
+            value={formData.priority}
+            onChange={handleChange}
+            className="form-control form-control-sm d-inline-flex"
+          >
+            <option value={1}>Ultra-Über</option>
+            <option value={2}>Über</option>
+            <option value={3}>Meh</option>
+          </select>
         </div>
+        <button className="btn-primary rig btn btn-sm TodoForm-addBtn">
+          Gø!
+        </button>
+      </div>
 
-        <div className="mb-3">
-          <textarea
-              id="TodoForm-description"
-              name="description"
-              className="form-control"
-              placeholder="Description"
-              onChange={handleChange}
-              value={formData.description}
-              aria-label="Description"
-          />
-        </div>
-
-        <div className="mb-3 d-flex justify-content-between">
-          <div className="w-75 d-flex justify-content-between">
-            <label htmlFor="TodoForm-priority"
-                   className="d-inline-flex">Priority:&nbsp;&nbsp;
-            </label>
-            <select id="TodoForm-priority"
-                    name="priority"
-                    value={formData.priority}
-                    onChange={handleChange}
-                    className="form-control form-control-sm d-inline-flex"
-            >
-              <option value={1}>Ultra-Über</option>
-              <option value={2}>Über</option>
-              <option value={3}>Meh</option>
-            </select>
-          </div>
-          <button className="btn-primary rig btn btn-sm TodoForm-addBtn">
-            Gø!
-          </button>
-        </div>
-
-      </form>
+    </form>
   );
 }
 

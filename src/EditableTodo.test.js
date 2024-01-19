@@ -11,6 +11,8 @@ const TEST_TODO = {
   description: "creating todo list",
   priority: 1
 };
+const update = jest.fn();
+const remove = jest.fn();
 
 let renderedComp;
 let container;
@@ -18,8 +20,8 @@ beforeEach(function () {
   renderedComp = render(
     <EditableTodo
       todo={TEST_TODO}
-      update={TodoApp.update}
-      remove={TodoApp.remove}
+      update={update}
+      remove={remove}
     />
   );
   container = renderedComp.container;
@@ -29,8 +31,8 @@ describe("editable todo component", function () {
   it("renders without crashing", function () {
     render(<EditableTodo
       todo={TEST_TODO}
-      update={TodoApp.update}
-      remove={TodoApp.remove}
+      update={update}
+      remove={remove}
     />);
   });
 
@@ -60,7 +62,7 @@ describe("editable todo component", function () {
     ).toBeInTheDocument();
     expect(
       container.querySelector("#TodoForm-description").innerHTML)
-    .toEqual("creating todo list");
+      .toEqual("creating todo list");
 
     // check that currently selected value is todo's priority
     const select = container.querySelector("#TodoForm-priority");
@@ -79,13 +81,11 @@ describe("editable todo component", function () {
     fireEvent.input(descriptionInput, { target: { value: "test updated" } });
     fireEvent.input(priorityInput, { target: { value: 2 } });
 
+    expect(update).toHaveBeenCalledTimes(0);
     // submit form
     fireEvent.click(container.querySelector(".TodoForm-addBtn"));
 
-    // check that updated fields are shown on page
-    expect(renderedComp.getByText("test new title")).toBeInTheDocument();
-    expect(renderedComp.getByText("test updated")).toBeInTheDocument();
-    expect(renderedComp.getByText("(priority: 2)")).toBeInTheDocument();
+    expect(update).toHaveBeenCalledTimes(1);
   });
 
 });
