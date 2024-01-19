@@ -30,14 +30,17 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) {
-    update();
+    update(formData);
     toggleEdit();
   }
 
   return (
       <div className="EditableTodo">
         { isEditing
-        ? <TodoForm />
+        ? <TodoForm
+            initialFormData={todo}
+            handleSave={handleSave}
+          />
         : <div className="mb-3">
             <div className="float-end text-sm-end">
               <button

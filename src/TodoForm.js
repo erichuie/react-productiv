@@ -18,7 +18,6 @@ function TodoForm({ initialFormData, handleSave }) {
   const [formData, setFormData] = useState(initialFormData);
 
 
-
   /** Update form input. */
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -33,18 +32,22 @@ function TodoForm({ initialFormData, handleSave }) {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    formData.id = uuid();
+    if (!("id" in formData)) {
+      formData.id = uuid();
+    }
+    console.log("submitting form:", formData)
+
 
     handleSave(formData);
     setFormData(initialFormData);
   }
 
   return (
-      <form className="NewTodoForm" onSubmit={handleSubmit}>
+      <form className="TodoForm" onSubmit={handleSubmit}>
 
         <div className="mb-3">
           <input
-              id="newTodo-title"
+              id="TodoForm-title"
               name="title"
               className="form-control"
               placeholder="Title"
@@ -56,7 +59,7 @@ function TodoForm({ initialFormData, handleSave }) {
 
         <div className="mb-3">
           <textarea
-              id="newTodo-description"
+              id="TodoForm-description"
               name="description"
               className="form-control"
               placeholder="Description"
@@ -68,10 +71,10 @@ function TodoForm({ initialFormData, handleSave }) {
 
         <div className="mb-3 d-flex justify-content-between">
           <div className="w-75 d-flex justify-content-between">
-            <label htmlFor="newTodo-priority"
+            <label htmlFor="TodoForm-priority"
                    className="d-inline-flex">Priority:&nbsp;&nbsp;
             </label>
-            <select id="newTodo-priority"
+            <select id="TodoForm-priority"
                     name="priority"
                     value={formData.priority}
                     onChange={handleChange}
@@ -82,7 +85,7 @@ function TodoForm({ initialFormData, handleSave }) {
               <option value={3}>Meh</option>
             </select>
           </div>
-          <button className="btn-primary rig btn btn-sm NewTodoForm-addBtn">
+          <button className="btn-primary rig btn btn-sm TodoForm-addBtn">
             Gø!
           </button>
         </div>

@@ -26,9 +26,9 @@ it("submitting form works", function () {
     handleSave={handleSave}
   />);
 
-  const titleInput = container.querySelector("#newTodo-title");
-  const descriptionInput = container.querySelector("#newTodo-description");
-  const priorityInput = container.querySelector("#newTodo-priority");
+  const titleInput = container.querySelector("#TodoForm-title");
+  const descriptionInput = container.querySelector("#TodoForm-description");
+  const priorityInput = container.querySelector("#TodoForm-priority");
 
 
   fireEvent.input(titleInput, { target: { value: "test title" } });
@@ -38,15 +38,15 @@ it("submitting form works", function () {
   expect(handleSave).toHaveBeenCalledTimes(0);
 
   // submit and check callback is called
-  fireEvent.click(container.querySelector(".NewTodoForm-addBtn"));
+  fireEvent.click(container.querySelector(".TodoForm-addBtn"));
   expect(handleSave).toHaveBeenCalledTimes(1);
 
   // check initial form values reset
   expect(container.querySelector("input[value='']")).toBeInTheDocument();
-  expect(container.querySelector("#newTodo-description").innerHTML).toEqual("");
+  expect(container.querySelector("#TodoForm-description").innerHTML).toEqual("");
 
   // check that currently selected value is default initial
-  const select = container.querySelector("#newTodo-priority")
+  const select = container.querySelector("#TodoForm-priority")
   expect(select.options[select.selectedIndex].value).toEqual("1");
 
 });
