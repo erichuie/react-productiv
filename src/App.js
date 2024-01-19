@@ -3,6 +3,7 @@ import TodoApp from "./TodoApp";
 import Footer from "./Footer";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import QuoteApp from './QuoteApp';
 
 /** Site application.
  *
@@ -18,6 +19,8 @@ function App() {
           <p className="lead">The best name in todo list management.</p>
         </div>
       </header>
+
+      <QuoteApp />
 
       <section className="container mt-4">
         <TodoApp initialTodos={[
