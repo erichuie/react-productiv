@@ -7,7 +7,7 @@ const TEST_TODO = {
   id:1,
   title:"Make Todo list",
   description:"creating todo list",
-  priority: "1"
+  priority: 1
 };
 
 let renderedComp;
