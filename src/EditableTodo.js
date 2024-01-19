@@ -5,17 +5,23 @@ import TodoForm from "./TodoForm";
 /** Show editable todo item.
  *
  * Props
- * - todo
+ * - todo: { id, title, description, priority }
  * - update(): fn to call to update a todo
  * - remove(): fn to call to remove a todo
+ *
+ * States
+ * - isEditing (true/false)
  *
  * EditableTodoList -> EditableTodo -> { Todo, TodoForm }
  */
 
-function EditableTodo() {
+function EditableTodo({ todo, update, remove }) {
+  const [isEditing, setIsEditing] = useState(false);
 
   /** Toggle if this is being edited */
-  function toggleEdit() { }
+  function toggleEdit() {
+    setIsEditing(!isEditing);
+  }
 
   /** Call remove fn passed to this. */
   function handleDelete() { }
@@ -23,31 +29,32 @@ function EditableTodo() {
   /** Edit form saved; toggle isEditing and update in ancestor. */
   function handleSave(formData) { }
 
+  const { id, title, description, priority } = todo;
   return (
       <div className="EditableTodo">
-
-                EITHER
-
-                <TodoForm />
-
-                OR
-
-                <div className="mb-3">
-                  <div className="float-end text-sm-end">
-                    <button
-                        className="EditableTodo-toggle btn-link btn btn-sm"
-                        onClick={toggleEdit}>
-                      Edit
-                    </button>
-                    <button
-                        className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
-                        onClick={handleDelete}>
-                      Del
-                    </button>
-                  </div>
-                  <Todo />
-                </div>
-
+        { isEditing
+        ? <TodoForm />
+        : <div className="mb-3">
+            <div className="float-end text-sm-end">
+              <button
+                  className="EditableTodo-toggle btn-link btn btn-sm"
+                  onClick={toggleEdit}>
+                Edit
+              </button>
+              <button
+                  className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
+                  onClick={handleDelete}>
+                Del
+              </button>
+            </div>
+            <Todo
+              id={id}
+              title={title}
+              description={description}
+              priority={priority}
+            />
+          </div>
+        }
       </div>
   );
 }

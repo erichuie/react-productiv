@@ -9,7 +9,7 @@ const testValues = {
   priority: "1"
 };
 
-describe("productiv app", function () {
+describe("todo component", function () {
   it("renders without crashing", function () {
     const { id, title, description, priority } = testValues;
     render(<Todo
@@ -26,7 +26,8 @@ describe("productiv app", function () {
       title={title}
       description={description}
       priority={priority}/>);
-    // expect(container.getByText)
+
+    // check for all required text elements
     expect(renderedTodo.getByText("Make Todo list")).toBeInTheDocument();
     expect(renderedTodo.getByText("creating todo list")).toBeInTheDocument();
     expect(renderedTodo.getByText("(priority: 1)")).toBeInTheDocument();
