@@ -1,29 +1,36 @@
 import { useState } from "react";
+import "./QuoteApp.css";
 import Quote from "./Quote";
 
-const  INSPIRATIONAL_QUOTE_URL = 'https://inspo-quotes-api.herokuapp.com';
+import { getAPIQuote } from "./helper";
+
+
+/** Component to get an inspirational quote
+ *
+ * Props:
+ * - None
+ *
+ * States:
+ * - quote
+ */
 
 function QuoteApp() {
   const [quote, setQuote] = useState("");
 
-  async function getAPIQuote(){
-    const response = await fetch(`${INSPIRATIONAL_QUOTE_URL}/quotes/random`);
-    // console.log("response is",await response.json());
-    return await response.json();
-  }
-
-  async function getNewQuote(){
-    // console.log("calling getAPIQuote", await getAPIQuote());
-    // const apiQuote = await getAPIQuote();
-    setQuote(
-      async () => (await getAPIQuote()).quote.text
-    )
+  async function getNewQuote() {
+    console.log("getting new quote")
+    const newQuote = await getAPIQuote();
+    console.log('setting new quote to', newQuote);
+    setQuote(newQuote);
+    console.log("here")
   }
 
   return (
-    <div>
+    <div className="QuoteApp">
       <Quote quote={quote} />
-      <button onClick={getNewQuote}>Click for quote!</button>
+      <button onClick={getNewQuote} className="QuoteApp-button">
+        Click for quote!
+      </button>
     </div>);
 }
 

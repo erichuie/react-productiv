@@ -18,9 +18,8 @@ function App() {
           <h1>Prøductïv</h1>
           <p className="lead">The best name in todo list management.</p>
         </div>
+        <QuoteApp />
       </header>
-
-      <QuoteApp />
 
       <section className="container mt-4">
         <TodoApp initialTodos={[

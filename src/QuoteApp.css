@@ -1,0 +1,9 @@
+
+.QuoteApp{
+  display:flex;
+  flex-direction: column;
+}
+
+.QuoteApp-button{
+  width: 200px
+}
