@@ -20,16 +20,12 @@ function TodoApp({ initialTodos }) {
 
   /** add a new todo to list */
   function create(newTodo) {
-    //make into a callback function
-    setTodos(
-      [...todos, newTodo]
-    );
+    setTodos(() => [...todos, newTodo]);
   }
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
-    //make into a callback function
-    setTodos(todos.map(td =>
+    setTodos(() => todos.map(td =>
       td.id === updatedTodo.id
         ? updatedTodo
         : td
@@ -42,14 +38,6 @@ function TodoApp({ initialTodos }) {
       td.id !== id
     ));
   }
-
-  //could have put initial data within the form component
-  //make name initialFormTodo
-  const initialFormData = {
-    title: '',
-    description: '',
-    priority: 1,
-  };
 
   return (
     <main className="TodoApp">
@@ -77,7 +65,6 @@ function TodoApp({ initialTodos }) {
           <section>
             <h3 className="mb-3">Add Nü</h3>
             <TodoForm
-              initialFormData={initialFormData}
               handleSave={create}
             />
           </section>

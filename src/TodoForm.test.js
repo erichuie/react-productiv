@@ -33,7 +33,7 @@ it("submitting form works", function () {
 
   fireEvent.input(titleInput, { target: { value: "test title" } });
   fireEvent.input(descriptionInput, { target: { value: "test description" } });
-  fireEvent.input(priorityInput, { target: { value: 2 } });
+  fireEvent.input(priorityInput, { target: { value: "2" } });
 
   expect(handleSave).toHaveBeenCalledTimes(0);
 

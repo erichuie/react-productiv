@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
 
+const defaultInitialData = {
+  title: '',
+  description: '',
+  priority: 1,
+};
+
 /** Form for adding.
  *
  * Props:
@@ -13,11 +19,9 @@ import { v4 as uuid } from 'uuid';
  * { TodoApp, EditableTodo } -> TodoForm
  */
 
-function TodoForm({ initialFormData, handleSave }) {
+function TodoForm({ initialFormData = defaultInitialData, handleSave }) {
 
   const [formData, setFormData] = useState(initialFormData);
-
-  //find way to keep priority as a Number and not a string
 
   /** Update form input. */
   function handleChange(evt) {
@@ -25,22 +29,22 @@ function TodoForm({ initialFormData, handleSave }) {
 
     setFormData(fData => ({
       ...fData,
-      [name]: value,
+      [name]: name === "priority" ? Number(value) : value,
     }));
   }
 
   /** Call parent function and clear form. */
   function handleSubmit(evt) {
     evt.preventDefault();
+    console.log('submission formData:', formData);
 
-    //don't mutate state; make a whole new object instead
-    if (!("id" in formData)) {
-      formData.id = uuid();
-    }
-    console.log("submitting form:", formData);
+    const dataToSubmit = {
+      id: uuid(),
+      ...formData,
+    };
+    console.log('submission dataToSubmit:', dataToSubmit);
 
-
-    handleSave(formData);
+    handleSave(dataToSubmit);
     setFormData(initialFormData);
   }
 
