@@ -37,10 +37,16 @@ it("submitting form works", function () {
 
   expect(handleSave).toHaveBeenCalledTimes(0);
 
+  // submit and check callback is called
   fireEvent.click(container.querySelector(".NewTodoForm-addBtn"));
   expect(handleSave).toHaveBeenCalledTimes(1);
 
+  // check initial form values reset
   expect(container.querySelector("input[value='']")).toBeInTheDocument();
-  expect(container.querySelector("textarea[value='Description']")).toBeInTheDocument();
-  expect(container.querySelector("select[value=1]")).toBeInTheDocument();
+  expect(container.querySelector("#newTodo-description").innerHTML).toEqual("");
+
+  // check that currently selected value is default initial
+  const select = container.querySelector("#newTodo-priority")
+  expect(select.options[select.selectedIndex].value).toEqual("1");
+
 });
