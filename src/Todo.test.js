@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import Todo from "./Todo";
 
-const testValues = {
+const TEST_TODO = {
   id:1,
   title:"Make Todo list",
   description:"creating todo list",
@@ -11,21 +11,11 @@ const testValues = {
 
 describe("todo component", function () {
   it("renders without crashing", function () {
-    const { id, title, description, priority } = testValues;
-    render(<Todo
-      id={id}
-      title={title}
-      description={description}
-      priority={priority}/>);
+    render(<Todo todo={TEST_TODO}/>);
   });
 
   it("shows correct values", function () {
-    const { id, title, description, priority } = testValues;
-    const renderedTodo = render(<Todo
-      id={id}
-      title={title}
-      description={description}
-      priority={priority}/>);
+    const renderedTodo = render(<Todo todo={TEST_TODO}/>);
 
     // check for all required text elements
     expect(renderedTodo.getByText("Make Todo list")).toBeInTheDocument();

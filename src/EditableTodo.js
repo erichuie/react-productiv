@@ -34,7 +34,6 @@ function EditableTodo({ todo, update, remove }) {
     toggleEdit();
   }
 
-  const { id, title, description, priority } = todo;
   return (
       <div className="EditableTodo">
         { isEditing
@@ -53,10 +52,7 @@ function EditableTodo({ todo, update, remove }) {
               </button>
             </div>
             <Todo
-              id={id}
-              title={title}
-              description={description}
-              priority={priority}
+              todo={todo}
             />
           </div>
         }
